@@ -21,8 +21,18 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "angular-bootstrap-md": "^5.0.5",
     "core-js": "^2.4.1",
+    "cors": "^2.8.4",
+    "crypto": "^1.0.1",
+    "install": "^0.10.2",
+    "jsonwebtoken": "^8.1.0",
+    "mysql": "^2.14.1",
+    "mysql2": "^1.4.2",
+    "ngx-mydatepicker": "^2.3.3",
+    "npm": "^5.5.1",
     "rxjs": "^5.4.1",
+    "sequelize": "^4.8.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

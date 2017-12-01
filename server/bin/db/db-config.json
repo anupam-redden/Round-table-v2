@@ -1,0 +1,24 @@
+{
+    "dev": {
+        "driver": "mysql",
+        "user": "root",
+        "password":"",
+		"port":3306,
+        "database": "roundtable_v2",
+        "dialect": "mysql"
+    },
+
+    "test": {
+        "driver": "mysql",
+        "user": "root",
+        "database": "myapp_test",
+        "dialect": "mysql"
+    },
+
+    "production": {
+        "driver": "worksred_vam",
+        "user": "kfx37_O+&Un+",
+        "database": "worksred_vam",
+        "dialect": "mysql"
+    }
+}

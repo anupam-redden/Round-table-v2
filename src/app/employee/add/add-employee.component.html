@@ -1,0 +1,154 @@
+<h2>Add Employee</h2>
+<hr>
+
+<div class="col-md-6">
+    <form [formGroup]="emp_frm" (ngSubmit)="saveEmp(emp_frm.value)" >
+    <div class="from-group col-md-12">
+        <label for="fname" class="col-md-2">
+            *First Name:
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="fname" formControlName="fname" placeholder="Enter First Name">
+            <div class="error" *ngIf="!emp_frm.controls['fname'].valid && emp_frm.controls['fname'].touched">This field is required</div>
+        </div>
+        
+    </div> 
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+        <label for="lname" class="col-md-2">
+            *Last Name:
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="lname" formControlName="lname" placeholder="Enter Last Name">
+            <div class="error" *ngIf="!emp_frm.controls['lname'].valid && emp_frm.controls['lname'].touched">This field is required</div>
+        </div>
+        
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+        <label for="email" class="col-md-2">
+            *Email:
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter Email">
+            <div class="error" *ngIf="!emp_frm.controls['email'].valid && emp_frm.controls['email'].touched">
+                <div style="float: left;" *ngIf="emp_frm.controls['email'].hasError('required')">
+                    This field is required
+                  </div>
+                  <div style="float: left;" *ngIf="emp_frm.controls['email'].hasError('email')">
+                    Invalid email 
+                  </div>  
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+        <label for="email" class="col-md-2">
+            *Date of Birth:
+        </label>
+        <div class="col-md-5">
+            
+                <div class="input-group">
+                    <input class="form-control" style="float:none" placeholder="Select a date" ngx-mydatepicker name="dob"
+                            [options]="dateOptions" #dp="ngx-mydatepicker" formControlName="dob"/>
+            
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" (click)="dp.clearDate()">
+                            <i class="glyphicon glyphicon-remove"></i>
+                        </button>
+                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+                <div class="alert" *ngIf="!emp_frm.controls['dob'].valid && emp_frm.controls['dob'].touched">Please select valid date of birth</div>
+        </div>
+        <div class="col-md-3"><small>(DD/MM/YYYY)</small></div>
+        
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+            <label for="address" class="col-md-2">
+                *Address:
+            </label>
+            <div class="col-md-9">
+               <textarea placeholder="Address" formControlName="address" class="form-control" ></textarea>
+               <div class="error" *ngIf="!emp_frm.controls['address'].valid && emp_frm.controls['address'].touched">This field is required</div>
+            </div>
+            
+        </div>
+    
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+                <label for="address" class="col-md-2">
+                        *Depertment:
+                </label>
+                <div class="col-md-9" >
+                   <select class="form-control" formControlName="user_type">
+                       
+                       <option value="{{typelist.id}}" *ngFor="let typelist of user_type_list">
+                           {{typelist.type}}
+                        </option>
+                       
+                   </select>
+                   <div class="error" *ngIf="!emp_frm.controls['user_type'].valid && emp_frm.controls['user_type'].touched">This field is required</div>
+                </div>
+                
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+        <label for="address" class="col-md-2">
+                *Gender:
+        </label>
+        <div class="col-md-9" >
+           <select class="form-control" formControlName="gender">
+               <option value="male">Male</option>
+               <option value="female">Female</option>
+               
+           </select>
+        </div>
+        
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+<div class="from-group col-md-12">
+    <label for="password" class="col-md-2">
+        *Password:
+    </label>
+    <div class="col-md-9">
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter Password">
+        <div class="error" *ngIf="!emp_frm.controls['password'].valid && emp_frm.controls['password'].touched">This field is required</div>
+    </div>
+    
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+<div class="from-group col-md-12">
+    <label for="phone" class="col-md-2">
+        *Mobile:
+    </label>
+    <div class="col-md-9">
+        <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Enter phone">
+        <div class="error" *ngIf="!emp_frm.controls['phone'].valid && emp_frm.controls['phone'].touched">
+                <div class="error" *ngIf="emp_frm.controls['phone'].hasError('required')">
+                        Mobile number is required
+                </div>   
+                <div class="error" *ngIf="emp_frm.controls['phone'].hasError('length')">
+                        Mobile number 10 digits
+                </div>
+                <div class="error" *ngIf="emp_frm.controls['phone'].hasError('pattern')">
+                       number only
+                </div>     
+        </div>
+    </div>
+    
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="btnGroup col-md-12">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-10">
+            <button class="btn btn-primary" type="submit" [disabled]="emp_frm.invalid">Submit</button>
+            <p class="error" *ngIf="emp_frm.invalid">*Data is required!</p>
+            </div>
+        </div>
+</form>
+</div>
