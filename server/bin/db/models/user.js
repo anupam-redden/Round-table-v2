@@ -18,6 +18,7 @@ module.exports =function(sequelize, DataTypes) {
 		profile_pic: DataTypes.STRING,
         sex: DataTypes.STRING,
         dob:DataTypes.DATE,
+        user_status:{type:DataTypes.INTEGER,defaultValue:1,comment:'0 for block,1 for active,2 for delete'},
         address:DataTypes.STRING(500)
     }, {
         timestamps: false,

@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 
 module.exports = function(req,res,next) {
-    console.log(req.headers['authorization'])
+    //console.log(req.headers['authorization'])
   var token = req.body.token || req.query.token || req.headers['authorization'];
     if (token) {
     // verifies secret and checks exp

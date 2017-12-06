@@ -1,15 +1,16 @@
-<h2>Add Employee</h2>
+<h2>Edit Employee</h2>
 <hr>
 
 <div class="col-md-6">
-    <form [formGroup]="emp_frm" (ngSubmit)="saveEmp(emp_frm.value)" >
+    <form [formGroup]="emp_frm" (ngSubmit)="editEmp(emp_frm.value)" >
+      <input type="hidden" formControlName="index">
     <div class="from-group col-md-12">
         <label for="fname" class="col-md-2">
             *First Name:
         </label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="fname" formControlName="fname" placeholder="Enter First Name">
-            <div class="error" *ngIf="!emp_frm.controls['fname'].valid && emp_frm.controls['fname'].touched">This field is required</div>
+            <div class="error" *ngIf="!emp_frm.controls['fname'].valid">This field is required</div>
         </div>
         
     </div> 
@@ -20,7 +21,7 @@
         </label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="lname" formControlName="lname" placeholder="Enter Last Name">
-            <div class="error" *ngIf="!emp_frm.controls['lname'].valid && emp_frm.controls['lname'].touched">This field is required</div>
+            <div class="error" *ngIf="!emp_frm.controls['lname'].valid">This field is required</div>
         </div>
         
     </div>
@@ -31,17 +32,13 @@
         </label>
         <div class="col-md-9">
             <input type="text" class="form-control" id="email" formControlName="email" placeholder="Enter Email">
-            <div class="error" *ngIf="!emp_frm.controls['email'].valid && emp_frm.controls['email'].touched">
+            <div class="error" *ngIf="!emp_frm.controls['email'].valid">
                 <div style="float: left;" *ngIf="emp_frm.controls['email'].hasError('required')">
                     This field is required
                   </div>
                   <div style="float: left;" *ngIf="emp_frm.controls['email'].hasError('email')">
                     Invalid email 
-                  </div>
-                  <div style="float: left;" *ngIf="emp_frm.controls['email'].hasError('isEmailUnique')">
-                        Already registered
-                      </div>
-                    
+                  </div>  
             </div>
         </div>
         
@@ -66,7 +63,7 @@
                         </button>
                     </span>
                 </div>
-                <div class="alert" *ngIf="!emp_frm.controls['dob'].valid && emp_frm.controls['dob'].touched">Please select valid date of birth</div>
+                <div class="alert" *ngIf="!emp_frm.controls['dob'].valid">Please select valid date of birth</div>
         </div>
         <div class="col-md-3"><small>(DD/MM/YYYY)</small></div>
         
@@ -78,7 +75,7 @@
             </label>
             <div class="col-md-9">
                <textarea placeholder="Address" formControlName="address" class="form-control" ></textarea>
-               <div class="error" *ngIf="!emp_frm.controls['address'].valid && emp_frm.controls['address'].touched">This field is required</div>
+               <div class="error" *ngIf="!emp_frm.controls['address'].valid">This field is required</div>
             </div>
             
         </div>
@@ -96,7 +93,7 @@
                         </option>
                        
                    </select>
-                   <div class="error" *ngIf="!emp_frm.controls['user_type'].valid && emp_frm.controls['user_type'].touched">This field is required</div>
+                   <div class="error" *ngIf="!emp_frm.controls['user_type'].valid">This field is required</div>
                 </div>
                 
     </div>
@@ -116,32 +113,22 @@
 </div>
 <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
 <div class="from-group col-md-12">
-    <label for="password" class="col-md-2">
-        *Password:
-    </label>
-    <div class="col-md-9">
-        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter Password">
-        <div class="error" *ngIf="!emp_frm.controls['password'].valid && emp_frm.controls['password'].touched">This field is required</div>
-    </div>
-    
-</div>
-<div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
-<div class="from-group col-md-12">
     <label for="phone" class="col-md-2">
         *Mobile:
     </label>
     <div class="col-md-9">
         <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="Enter phone">
-        <div class="error" *ngIf="!emp_frm.controls['phone'].valid && emp_frm.controls['phone'].touched">
+        <div class="error" *ngIf="!emp_frm.controls['phone'].valid">
                 <div class="error" *ngIf="emp_frm.controls['phone'].hasError('required')">
                         Mobile number is required
                 </div>   
-                <div class="error" *ngIf="emp_frm.controls['phone'].hasError('length')">
+                <div class="error" *ngIf="emp_frm.controls['phone'].hasError('minlength')">
                         Mobile number 10 digits
                 </div>
                 <div class="error" *ngIf="emp_frm.controls['phone'].hasError('pattern')">
                        number only
-                </div>     
+                </div>
+                
         </div>
     </div>
     

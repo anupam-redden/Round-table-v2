@@ -7,10 +7,13 @@
   
                       <br>
                       <br>
-                      <br>
-  
+                      
                       <form class="col-lg-12" [formGroup]="login_frm" (ngSubmit)="authenticate(login_frm.value)">
+                                 
                           <div class="input-group" class="form-group" style="width: 540px; text-align: center; margin: 0 auto;">
+                              
+                              <div [ngClass]="{'alert':message!='','alert-danger':true}">{{message}}</div>
+                             
                               <input class="form-control input-lg" title="Confidential signup."
                                   placeholder="Enter your email address" type="text" formControlName="email">
                                   <div class="alert" *ngIf="!login_frm.controls['email'].valid && login_frm.controls['email'].touched">

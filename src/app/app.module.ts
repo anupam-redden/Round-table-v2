@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { AddEmployeeComponent } from './employee/add/add-employee.component';
+import { EditEmployeeComponent } from './employee/edit/edit-employee.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
 
@@ -27,6 +28,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +40,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     DashboardComponent,
     EmployeeComponent,
     AddEmployeeComponent,
+    EditEmployeeComponent,
     
   ],
   imports: [
@@ -46,6 +50,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     ReactiveFormsModule,
     HttpClientModule,
     MDBBootstrapModule.forRoot(),
+    
     NgxMyDatePickerModule.forRoot()
    
   ],

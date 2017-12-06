@@ -27,6 +27,10 @@ module.exports=function(appObj,db){
 	router.post("/authenticate",userOP.authenticate);
 	router.get("/usersType",userOP.getUserType);
 	router.post("/api/saveUser",userOP.saveUser);
+	router.post("/api/updateUser",userOP.updateUser);
+	router.get("/getUserByEmail/:email",userOP.getUserByEmail);
+	
+	router.get("/api/delete-user/:id",userOP.deleteUser);
 
 	
 }

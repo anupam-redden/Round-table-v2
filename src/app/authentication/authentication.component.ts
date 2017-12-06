@@ -16,11 +16,12 @@ export class AuthenticationComponent implements OnInit {
   emailValidateMsg="Please give an valid email";
   requiredMsg="This field is required";
   minlen8="Password min length 8";
+  message="";
   constructor(private fb:FormBuilder,private router:Router,private authservice1:AuthService,private a_route:ActivatedRoute) {
     const pureEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       this.login_frm=this.fb.group({
         'email':[null,[Validators.required,Validators.pattern(pureEmail)]],
-        'password':[null,[Validators.required,Validators.minLength(8)]]
+        'password':[null,[Validators.required]]
 
        });
 
@@ -28,13 +29,14 @@ export class AuthenticationComponent implements OnInit {
    
   ngOnInit() {
     this.a_route.params.subscribe(params=>{
-      console.log(params)
+      
         if(params.islogout=='1'){
              this.logout()
         }
     })
-    
+   
     if(this.authservice1.isLoggedin()){
+     
        this.router.navigate(['dashboard']);
     }
   }
@@ -49,8 +51,16 @@ export class AuthenticationComponent implements OnInit {
                                 if(data['auth']=="1"){
                                     localStorage.is_logged=1
                                     localStorage.authtoken=data['token'];
-                                    localStorage.user=data['user'];
+                                    localStorage.user=JSON.stringify(data['user']);
+                                    this.authservice1.auth_user=data['user'];
+                                    
                                     this.router.navigate(['dashboard']);
+                                 }
+                                 else if(data['auth']=="0"){
+                                     this.message="Wrong email or password"
+                                 }
+                                 else if(data['auth']=="-1"){
+                                  this.message="Your account has suspended!!"
                                  }
                           });
   }

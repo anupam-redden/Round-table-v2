@@ -3,11 +3,14 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import {Response,Headers,RequestOptions,Http} from '@angular/http';
 import { Config } from '../config';
 import { Router } from "@angular/router"
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {User} from '../model/user';
 @Injectable()
 export class AuthService {
   
-  
+  private messageSource = new BehaviorSubject<string>("");
+  auth_user:User;
+  currentMessage = this.messageSource.asObservable();
 
   constructor(private http:HttpClient,private router:Router) { }
 
@@ -38,7 +41,13 @@ export class AuthService {
       let param={email:email,password:password};
       return this.http.post(Config.no_auth_url+"/authenticate",param);
   }
-
   
+  getCurrentUser():any {
+    
+    return JSON.parse(localStorage.user);
+  }
+  sendMessage(message:string){
+    this.messageSource.next(message);
+  } 
 
 }

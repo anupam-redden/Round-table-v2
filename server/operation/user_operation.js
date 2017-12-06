@@ -7,13 +7,27 @@ module.exports=function(app,db){
 
          db.user.findAll({ 
                            where:{
-                                   user_type:{$ne:1}
+                                   user_type:{$ne:1},
+                                   user_status:{$ne:2}
                                  }
                         }).then(todo=>{
                       res.send(todo);
          });
 
    } 
+
+   usersOP.getUserByEmail=function(req,res){
+             var email=req.params.email 
+             db.user.findAll({ 
+                               where:{
+                                       email:email
+                                     }
+                            }).then(todo=>{
+                                    res.send(todo);
+                                });
+    
+       } 
+    
 
    usersOP.getUserType=function(req,res){
         db.usertype.findAll().then(todo=>{
@@ -41,7 +55,38 @@ module.exports=function(app,db){
                                  })
                 
                     }) 
-} 
+    }
+    
+    usersOP.deleteUser=function(req,res){
+        id=req.params.id
+        
+        db.user.update(
+                        {user_status:2},
+                        {where:{id:id}}
+                      ).then(todo=>{
+                          res.send("1");   
+                      })
+    }
+
+    usersOP.updateUser=function(req,res){
+        var user_info=JSON.parse(req.body.emp_json)
+       
+        db.user.update(
+                        {
+                            fname:user_info.fname,
+                            lname:user_info.lname,
+                            email:user_info.email,
+                            dob:user_info.dob,
+                            address:user_info.address,
+                            sex:user_info.sex,
+                            phone_no:user_info.phone_no,
+                            user_type:user_info.user_type
+                        },
+                        {where:{id:user_info.id}}
+                      ).then(todo=>{
+                          res.send("1");   
+                      })
+    }
    
    usersOP.authenticate=function(req,res){
              
@@ -57,24 +102,33 @@ module.exports=function(app,db){
                  }
 
              }).then(todo=>{
-                
-                    db.user_auth.count({
-                        where:{
-                            password:password,
-                            id:todo[0].id
-                        }
-                    }).then(data=>{
-                        if(data==1){
-                            let token = jwt.sign({id:todo[0].id}, "234sdfsdfAw@#234", {
-                                expiresIn: Math.floor(Date.now() / 1000)  // expires in 24 hour
-                            });
-                            res.send({user:todo[0],token:token,auth:"1"});
+                  if(todo.length>0){
+                      if(todo[0].user_status==1){
+                                    db.user_auth.count({
+                                        where:{
+                                            password:password,
+                                            id:todo[0].id
+                                        }
+                                    }).then(data=>{
+                                        if(data==1){
+                                            let token = jwt.sign({id:todo[0].id}, "234sdfsdfAw@#234", {
+                                                expiresIn: Math.floor(Date.now() / 1000)  // expires in 24 hour
+                                            });
+                                            res.send({user:todo[0],token:token,auth:"1"});
+                                    }
+                                    else{
+                                        res.send({auth:"0"});
+                                    }
+                                    
+                                    })
                        }
-                       else{
-                        res.send({auth:"0"});
+                       else if(todo[0].user_status==0){
+                        res.send({auth:"0"}); 
                        }
-                       
-                    })
+                }
+                else{
+                    res.send({auth:"0"}); 
+                }
                 
              });
 

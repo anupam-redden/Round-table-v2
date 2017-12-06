@@ -1,8 +1,11 @@
  
 <h2>User Management</h2>
 <hr>
+<div [ngClass]="{'alert':message!='','alert-success':true}">{{message}}</div>
+<div class="col-md-12">&nbsp;</div>
 <a  class="btn btn-primary waves-light" mdbRippleRadius routerLink="/epmloyee-add">Add New</a>
 <div class="col-md-12">&nbsp;</div>
+
 <table class="table table-striped">
       <thead>
         <tr>
@@ -14,16 +17,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of emp_data">
+        <tr *ngFor="let item of employee.emp_data;let i=index">
           <th scope="row">{{item.id}}</th>
           <td>{{item.fname}} </td>
           <td>{{item.lname}}</td>
           <td>{{item.email}}</td>
           <td style="text-align: center;">
             <div class="col-md-6">
-            <i class="fa fa-edit"></i>&nbsp;Edit
+           <a [routerLink]="['/epmloyee-edit',i]"><i class="fa fa-edit"></i>&nbsp;Edit</a> 
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" (click)="deleteEmployee(item.id,i)" style="cursor: pointer;">
             <i class="fa fa-trash"></i>&nbsp;Delete
           </div>
         </td>
