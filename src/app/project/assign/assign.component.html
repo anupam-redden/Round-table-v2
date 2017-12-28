@@ -1,0 +1,63 @@
+ 
+<h2>Project Assign Manangement</h2>
+<hr>
+<div [ngClass]="{'alert':message!='','alert-success':true}">{{message}}</div>
+<div class="col-md-12">&nbsp;</div>
+<div class="col-md-12">Project Name:{{project_dtl.name}}</div>
+<div class="col-md-12">Description:{{project_dtl.description}}</div>
+
+<div class="col-md-12">&nbsp;</div>
+
+<div class="col-md-10">
+<div  class="col-md-3" [hidden]="!hide_free_worker"><button  class="btn btn-primary waves-light" mdbRippleRadius (click)="showHideAddNew()">Add New</button></div>
+  
+  <div class="col-md-6" [hidden]="hide_free_worker">
+    <div class="col-md-9">
+      <select class="form-control" (change)="addNewDeveloper($event.target.value)">
+          <option value="">Select Employee</option>
+          <option value="{{emp_data.id}}" *ngFor="let emp_data of free_worker">
+              {{emp_data.fname}} {{emp_data.lname}}
+            </option>
+          
+      </select>
+    </div>
+    <div class="col-md-3">
+     <button  class="btn btn-primary waves-light" mdbRippleRadius (click)="showHideAddNew()">Close</button>
+    </div>
+  </div>   
+</div>
+<div class="col-md-12">&nbsp;</div>
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>User Type</th>
+          <th>Email</th>
+          <th>Date</th>
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of developer_data">
+          <th scope="row">{{item.user.id}}</th>
+          <td>{{item.user.fname}} </td>
+          <td>{{item.user.lname}}</td>
+          <td>{{item.user.usertype.type}}</td>
+          <td>{{item.user.email}}</td>
+          <td>{{item.createdAt}}</td>
+          <td style="text-align: center;">
+           
+          <div class="col-md-6" (click)="deleteProjectWorker(item.user.id)" style="cursor: pointer;">
+            <i class="fa fa-trash"></i>&nbsp;Delete
+          </div>
+        </td>
+        </tr>
+        
+      </tbody>
+</table>
+
+                                    
+

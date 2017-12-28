@@ -13,9 +13,11 @@ import { AddEmployeeComponent } from './employee/add/add-employee.component';
 import { EditEmployeeComponent } from './employee/edit/edit-employee.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { ProjectComponent } from './project/project.component';
 
 import { AuthService }  from './services/auth-service';
 import { EmployeeService }  from './services/employee-service';
+import { ProjectService }  from './services/project-service';
 
 
 import { Interseptor }  from './services/interceptor';
@@ -26,6 +28,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { AddProjectComponent } from './project/add/add-project.component';
+import { EditProjectComponent } from './project/edit/edit-project.component';
+import { AssignComponent } from './project/assign/assign.component';
+
 
 
 
@@ -41,6 +47,10 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     EmployeeComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
+    ProjectComponent,
+    AddProjectComponent,
+    EditProjectComponent,
+    AssignComponent,
     
   ],
   imports: [
@@ -58,6 +68,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
               AuthService,
               CanActivateViaAuthGuard,
               EmployeeService,
+              ProjectService,
               {
                 provide: HTTP_INTERCEPTORS,
                 useClass: Interseptor,

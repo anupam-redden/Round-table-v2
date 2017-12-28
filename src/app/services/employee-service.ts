@@ -15,6 +15,7 @@ export class EmployeeService {
   currentMessage = this.messageSource.asObservable();
   
   public emp_data:User[];
+  public bdm_data:User[];
   constructor(private http:HttpClient,private router:Router,private authservice:AuthService) { }
 
    
@@ -22,6 +23,12 @@ export class EmployeeService {
        
      this.http.get<User[]>(Config.api_url+"/users").subscribe(users=>this.emp_data=users)
          
+  } 
+  
+  getUserByType(userType){
+    
+      this.http.get<User[]>(Config.api_url+"/get-user-by-type/"+userType).subscribe(users=>this.bdm_data=users)
+      
   } 
 
   getUserTypeList(){

@@ -4,7 +4,7 @@ var DataTypes = require("sequelize");
 
 // load models
 var models = [
-     'user','usertype','user_auth','user_status'
+     'user','usertype','user_auth','user_status','project','assigned_developer'
 ];
 
 
@@ -19,6 +19,10 @@ models.forEach(function(model) {
 	
     m.user.belongsTo(m.usertype,{foreignKey:'user_type'}),
     m.user_auth.belongsTo(m.user,{foreignKey:'user_id'});
+    m.project.belongsTo(m.user,{foreignKey:'bdm_id'}),
+    m.assigned_developer.belongsTo(m.project,{foreignKey:'project_id'}),
+    m.project.hasMany(m.assigned_developer,{foreignKey:'project_id'}),
+    m.assigned_developer.belongsTo(m.user,{foreignKey:'user_id'})
  
 	
 })(module.exports);

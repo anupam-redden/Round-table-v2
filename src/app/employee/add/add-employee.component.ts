@@ -113,7 +113,7 @@ export class AddEmployeeComponent implements OnInit {
                    .subscribe(data=>{
                           this.emp_frm.reset();
                           this.empservice.sendMessage("Employee Added successfully")
-                          this.empservice.emp_data.push(auser);
+                          this.empservice.emp_data.push(new User(data));
                           this.router.navigateByUrl("/epmloyee-list");
                     });
     

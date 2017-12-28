@@ -1,0 +1,43 @@
+ 
+<h2>Project Management</h2>
+<hr>
+<div [ngClass]="{'alert':message!='','alert-success':true}">{{message}}</div>
+<div class="col-md-12">&nbsp;</div>
+<a  class="btn btn-primary waves-light" mdbRippleRadius routerLink="/project-add">Add New</a>
+<div class="col-md-12">&nbsp;</div>
+
+<table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Project Name</th>
+          <th>Description</th>
+          
+          <th style="text-align: center;">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pservice.project_data;let i=index">
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.name}} </td>
+          <td>{{item.description}}</td>
+         
+          <td style="text-align: center;">
+          <div class="col-md-4">
+            <a [routerLink]="['/project-edit',i]"><i class="fa fa-edit"></i>&nbsp;Edit</a> 
+          </div>
+          <div class="col-md-4">
+              <a [routerLink]="['/project-assign',i]"><i class="fa fa-user-o"></i>&nbsp;Assign</a> 
+            </div>
+          <div class="col-md-4"  style="cursor: pointer;" (click)="deleteProject(i)">
+            <i class="fa fa-trash"></i>&nbsp;Delete
+          </div>
+        </td>
+        </tr>
+        
+      </tbody>
+</table>
+
+                                    
+
+

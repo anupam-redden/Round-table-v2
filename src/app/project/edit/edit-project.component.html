@@ -1,0 +1,70 @@
+<h2>Add Project</h2>
+<hr>
+
+<div class="col-md-8">
+    <form [formGroup]="prj_frm" (ngSubmit)="updateProject(prj_frm.value)" >
+    <input type="hidden" value="" formControlName="id"/>  
+    <input type="hidden" value="" formControlName="index"/>  
+    <div class="from-group col-md-12">
+        <label for="fname" class="col-md-2">
+            *Project Name:
+        </label>
+        <div class="col-md-9">
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter Project Name">
+            <div class="error" *ngIf="!prj_frm.controls['name'].valid && prj_frm.controls['name'].touched">This field is required</div>
+        </div>
+        
+    </div> 
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    
+   
+    <div class="from-group col-md-12">
+            <label for="address" class="col-md-2">
+                *Description:
+            </label>
+            <div class="col-md-9">
+               <textarea placeholder="Description" formControlName="description" class="form-control" ></textarea>
+               <div class="error" *ngIf="!prj_frm.controls['description'].valid && prj_frm.controls['description'].touched">This field is required</div>
+            </div>
+            
+        </div>
+    
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+                <label for="address" class="col-md-2">
+                        *BDM:
+                </label>
+                <div class="col-md-9" >
+                   <select class="form-control" formControlName="bdm_id">
+                      <option value="">Select BDM</option>
+                       <option value="{{emp_data.id}}" *ngFor="let emp_data of epmservice.bdm_data">
+                           {{emp_data.fname}} {{emp_data.lname}}
+                        </option>
+                       
+                   </select>
+                   <div class="error" *ngIf="!prj_frm.controls['bdm_id'].valid && prj_frm.controls['bdm_id'].touched">This field is required</div>
+                </div>
+                
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="from-group col-md-12">
+      <label for="fname" class="col-md-2">
+          Project Url:
+      </label>
+      <div class="col-md-9">
+          <input type="text" class="form-control" id="url" formControlName="url" placeholder="Enter Project Url">
+          <div class="error" *ngIf="!prj_frm.controls['url'].valid && prj_frm.controls['url'].touched">Please enter valid url</div>
+      </div>
+      
+    </div> 
+
+<div class="col-md-12 col-sm-12 col-xs-12">&nbsp;</div>
+    <div class="btnGroup col-md-12">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-10">
+            <button class="btn btn-primary" type="submit" [disabled]="prj_frm.invalid">Submit</button>
+            <p class="error" *ngIf="prj_frm.invalid">*Data is required!</p>
+            </div>
+        </div>
+</form>
+</div>

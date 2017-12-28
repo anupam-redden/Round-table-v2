@@ -1,6 +1,7 @@
 module.exports=function(app,db){
 
    var usersOP={};
+   const Op = db.Op;
    let jwt    = require('jsonwebtoken');
   
    usersOP.getUser=function(req,res){
@@ -35,6 +36,17 @@ module.exports=function(app,db){
         });
    } 
 
+   usersOP.getUserByType=function(req,res){
+    userType=req.params.userType
+    db.user.findAll({
+        where:{
+            user_type:userType
+        }
+    }).then(todo=>{
+        res.send(todo);
+    });
+} 
+
     usersOP.saveUser=function(req,res){
     var user_info=JSON.parse(req.body.emp_json)
     
@@ -51,7 +63,7 @@ module.exports=function(app,db){
                      var idata={password:user_info.password,user_id:user_id}
                      db.user_auth.create(idata)
                                  .then(function(response){
-                                    res.send(response); 
+                                    res.send(todos); 
                                  })
                 
                     }) 
@@ -135,6 +147,22 @@ module.exports=function(app,db){
             
             
        } 
+
+
+       usersOP.getFreeWorker=function(req,res){
+                ids=req.body.ids
+                ids=ids.split(",")
+                db.user.findAll({ 
+                                where:{
+                                        user_type:{$ne:1},
+                                        user_status:{$ne:2},
+                                        id:{$notIn:ids}
+                                        }
+                            }).then(todo=>{
+                            res.send(todo);
+                });
+
+       }   
 
    return usersOP;
 }

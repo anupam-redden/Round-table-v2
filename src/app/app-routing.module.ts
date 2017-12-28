@@ -6,7 +6,10 @@ import { CanActivateViaAuthGuard } from './guard/CanActivateViaAuthGuard';
 import { EmployeeComponent } from './employee/employee.component';
 import { AddEmployeeComponent } from './employee/add/add-employee.component';
 import { EditEmployeeComponent } from './employee/edit/edit-employee.component';
-
+import { ProjectComponent } from './project/project.component';
+import { AddProjectComponent } from './project/add/add-project.component';
+import { EditProjectComponent } from './project/edit/edit-project.component';
+import { AssignComponent } from './project/assign/assign.component';
 const routes:Routes = [
    {path:'',redirectTo:"login",pathMatch:'full'},
    {path:'login',component:AuthenticationComponent},
@@ -14,7 +17,11 @@ const routes:Routes = [
    {path:'dashboard',component:DashboardComponent,canActivate:[CanActivateViaAuthGuard]},
    {path:'epmloyee-list',component:EmployeeComponent,canActivate:[CanActivateViaAuthGuard]},
    {path:'epmloyee-add',component:AddEmployeeComponent,canActivate:[CanActivateViaAuthGuard]},
-   {path:'epmloyee-edit/:index',component:EditEmployeeComponent,canActivate:[CanActivateViaAuthGuard]}
+   {path:'epmloyee-edit/:index',component:EditEmployeeComponent,canActivate:[CanActivateViaAuthGuard]},
+   {path:'project-list',component:ProjectComponent,canActivate:[CanActivateViaAuthGuard]},
+   {path:'project-add',component:AddProjectComponent,canActivate:[CanActivateViaAuthGuard]},
+   {path:'project-edit/:index',component:EditProjectComponent,canActivate:[CanActivateViaAuthGuard]},
+   {path:'project-assign/:index',component:AssignComponent,canActivate:[CanActivateViaAuthGuard]}
    
 ];
 
